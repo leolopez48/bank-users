@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Account;
 use App\Models\User;
 
 use Illuminate\Http\Request;
 use Encrypt;
 
-class AccountController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +21,7 @@ class AccountController extends Controller
 
         // Getting all the records
         if (($request->itemsPerPage == -1)) {
-            $itemsPerPage =  Account::count();
+            $itemsPerPage =  User::count();
             $skip = 0;
         }
 
@@ -31,14 +30,14 @@ class AccountController extends Controller
 
         $search = (isset($request->search)) ? "%$request->search%" : '%%';
 
-        $account = Account::allDataSearched($search, $sortBy, $sort, $skip, $itemsPerPage);
-        $account = Encrypt::encryptObject($account, "id");
+        $user = User::allDataSearched($search, $sortBy, $sort, $skip, $itemsPerPage);
+        $user = Encrypt::encryptObject($user, "id");
 
-        $total = Account::counterPagination($search);
+        $total = User::counterPagination($search);
 
         return response()->json([
             "message" => "Registros obtenidos correctamente.",
-            "data" => $account,
+            "data" => $user,
             "total" => $total,
         ]);
     }
@@ -51,13 +50,16 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        $account = new Account;
+        $user = new User;
 
-        $account->user_id = User::where('email', $request->email)->first()->id;
-        $account->amount = $request->amount;
-        $account->deleted_at = $request->deleted_at;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->email_verified_at = $request->email_verified_at;
+        $user->password = $request->password;
+        $user->phone = $request->phone;
+        $user->remember_token = $request->remember_token;
 
-        $account->save();
+        $user->save();
 
         return response()->json([
             "message" => "Registro creado correctamente.",
@@ -67,10 +69,10 @@ class AccountController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Account  account
+     * @param  \App\Models\User  user
      * @return \Illuminate\Http\Response
      */
-    public function show(Account $account)
+    public function show(User $user)
     {
         //
     }
@@ -79,19 +81,22 @@ class AccountController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Account  $account
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
         $data = Encrypt::decryptArray($request->all(), 'id');
 
-        $account = Account::where('id', $data['id'])->first();
-        $account->user_id = User::where('email', $request->email)->first()->id;
-        $account->amount = $request->amount;
-        $account->deleted_at = $request->deleted_at;
+        $user = User::where('id', $data['id'])->first();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->email_verified_at = $request->email_verified_at;
+        $user->password = $request->password;
+        $user->phone = $request->phone;
+        $user->remember_token = $request->remember_token;
 
-        $account->save();
+        $user->save();
 
         return response()->json([
             "message" => "Registro modificado correctamente.",
@@ -101,14 +106,14 @@ class AccountController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Account  $account
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request)
     {
         $id = Encrypt::decryptValue($request->id);
 
-        Account::where('id', $id)->delete();
+        User::where('id', $id)->delete();
 
         return response()->json([
             "message" => "Registro eliminado correctamente.",

@@ -17,6 +17,7 @@ class Check2FA
      */
     public function handle(Request $request, Closure $next)
     {
+        // dd(getenv('ENABLE_2FA'));
         if (!Session::has('user_2fa') && getenv('ENABLE_2FA') == 'true') {
             return redirect()->route('2fa.index');
         }

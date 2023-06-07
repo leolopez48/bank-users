@@ -1,7 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- Page Heading -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h2>Bienvenido {{ Auth::user()->name }}</h2>
+                        <h5>Has iniciado sesión correctamente, ahora puedes regresar al inicio.</h5>
+                        <a href="http://localhost:5173/callback" class="btn btn-primary">Ir al inicio</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Bienvenido, <b>{{ Auth::user()->name }}</b></h1>
     </div>
@@ -121,9 +134,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
-    <script>
+    {{-- <script>
         // Pie Chart Example
         var ctx = document.getElementById("myPieChart");
         var myPieChart = new Chart(ctx, {
@@ -155,5 +168,5 @@
                 cutoutPercentage: 80,
             },
         });
-    </script>
+    </script> --}}
 @endsection

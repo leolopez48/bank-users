@@ -32,8 +32,10 @@ class Account extends Model
         ->join('users', 'account.user_id', '=', 'users.id')
 
 		->where('account.user_id', 'like', $search)
+		->orWhere('account.amount', 'like', $search)
 		->orWhere('users.name', 'like', $search)
-		->orWhere('users.email', 'like', $search)
+		->orWhere('users.name', 'like', $search)
+		->orWhere('users.phone', 'like', $search)
 
         ->skip($skip)
         ->take($itemsPerPage)
@@ -47,8 +49,10 @@ class Account extends Model
         ->join('users', 'account.user_id', '=', 'users.id')
 
 		->where('account.user_id', 'like', $search)
+		->orWhere('account.amount', 'like', $search)
 		->orWhere('users.name', 'like', $search)
-		->orWhere('users.email', 'like', $search)
+		->orWhere('users.name', 'like', $search)
+		->orWhere('users.phone', 'like', $search)
 
         ->count();
     }

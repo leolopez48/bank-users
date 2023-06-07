@@ -27,9 +27,9 @@ const router = createRouter({
       meta: { requiresAuth: true }, // add meta field to specify the route requires authentication
     },
     {
-      path: "/department",
-      name: "department",
-      component: () => import("../views/DepartmentView.vue"),
+      path: "/Account",
+      name: "account",
+      component: () => import("../components/Account.vue"),
       meta: { requiresAuth: true }, // add meta field to specify the route requires authentication
     },
     {

@@ -1,28 +1,22 @@
-@font-face {
-    font-family: "Museo Sans";
-    font-style: normal;
-    font-weight: normal;
-    src: url("../fonts/MuseoSans-300.ttf") format("truetype");
-}
-
 html,
-body, #app  {
+body,
+#app {
     background-color: $background-color;
-    font-family: "Museo Sans";
+    font-family: 'Roboto', sans-serif;
     scroll-behavior: smooth;
 }
 
 /**
 * Buttons
 **/
-.btn.btn-primary{
+.btn.btn-primary {
     background-color: $primary-color;
     padding: 0.5rem 1em;
-    border-radius: 50px;
+    // border-radius: 50px;
     color: $white;
 }
 
-.btn.btn-secondary{
+.btn.btn-secondary {
     background-color: $secondary-color;
     padding: 0.5rem 1em;
     border-radius: 50px;
@@ -34,7 +28,7 @@ body, #app  {
 **/
 header {
     height: 89.45px;
-    background-color: #E0E5F1;
+    // background-color: #E0E5F1;
 }
 
 main {

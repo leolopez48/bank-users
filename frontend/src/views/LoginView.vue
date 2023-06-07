@@ -1,8 +1,8 @@
 <template>
   <div class="d-flex justify-content-center">
     <v-card class="text-center p-5 pt-4 pb-4 shadow">
-      <!-- <v-img class="mx-auto" src="https://www.itca.edu.sv/wp-content/themes/elaniin-itca/images/logoColor.png"
-        style="max-width: 300px" /> -->
+      <v-img class="mx-auto" src="https://www.itca.edu.sv/wp-content/themes/elaniin-itca/images/logoColor.png"
+        style="max-width: 300px" />
       <h2 class="pb-1" style="color: #5775b8">
         Ingresa tus datos para iniciar
       </h2>
