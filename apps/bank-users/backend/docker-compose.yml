@@ -1,0 +1,45 @@
+version: "3"
+
+networks:
+  nginx:
+    external: true
+
+services:
+  app:
+    image: cyberduck/php-fpm-laravel:8.2
+    container_name: php-backend
+    restart: always
+    expose:
+      - 9000
+    volumes:
+      - ./:/var/www/bank-users/backend:delegated
+    networks:
+      nginx:
+        aliases:
+          - php-backend
+
+  composer:
+    image: cyberduck/php-fpm-laravel:8.2
+    container_name: composer
+    volumes:
+      - ./:/var/www/bank-users/backend
+    working_dir: /var/www/bank-users/backend
+    depends_on:
+      - app
+    entrypoint: [ "composer" ]
+
+  npm:
+    image: node:18
+    container_name: npm
+    volumes:
+      - ./:/var/www/bank-users/backend
+    working_dir: /var/www/bank-users/backend
+    entrypoint: [ "npm" ]
+
+  artisan:
+    image: cyberduck/php-fpm-laravel:8.2
+    container_name: artisan
+    volumes:
+      - ./:/var/www/bank-users/backend:delegated
+    working_dir: /var/www/bank-users/backend
+    entrypoint: [ "php", "/var/www/bank-users/backend/artisan" ]
