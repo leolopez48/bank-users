@@ -15,7 +15,7 @@ import { es } from "vuetify/locale";
 import * as labs from "vuetify/labs/VDataTable";
 
 import 'vue3-toastify/dist/index.css';
-
+import './custom/custom.js';
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready

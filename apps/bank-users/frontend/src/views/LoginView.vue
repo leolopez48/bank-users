@@ -1,10 +1,10 @@
 <template>
-  <div class="d-flex justify-content-center">
+  <div class="d-flex justify-content-center mt-10">
     <v-card class="text-center p-5 pt-4 pb-4 shadow">
       <v-img class="mx-auto" src="https://www.itca.edu.sv/wp-content/themes/elaniin-itca/images/logoColor.png"
-        style="max-width: 300px" />
-      <h2 class="pb-1" style="color: #5775b8">
-        Ingresa tus datos para iniciar
+        style="max-width: 350px" />
+      <h2 class="text-center text-h5">
+        <b>Bienvenido a tu banca digital</b> 👋
       </h2>
       <base-button title="Iniciar sesión" type="primary" class="mt-5 mb-3 p-5 py-0" @click="redirectToProvider()" />
     </v-card>

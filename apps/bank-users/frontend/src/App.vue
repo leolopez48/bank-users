@@ -32,7 +32,7 @@ onMounted(async () => {
 
 <template>
   <the-header />
-  <the-menu />
+  <!-- <the-menu /> -->
 
   <main>
     <v-container>

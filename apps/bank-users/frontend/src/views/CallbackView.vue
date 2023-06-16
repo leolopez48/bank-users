@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column justify-center text-center mt-4">
     <Loader />
-    <div class="callback">Redireccionando...</div>
+    <div class="callback"></div>
   </div>
 </template>
  

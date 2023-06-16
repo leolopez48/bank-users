@@ -58,6 +58,7 @@ const router = createRouter({
       component: () => import("../components/PayService.vue"),
       meta: { requiresAuth: true, showBackButton: true }, // add meta field to specify the route requires authentication
     },
+
     {
       path: "/:pathMatch(.*)*",
       name: "NotFound",

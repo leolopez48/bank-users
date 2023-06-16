@@ -1,26 +1,50 @@
 <template>
   <div data-app>
     <v-card class="p-3 mt-3">
-      <v-container>
-        <h2>{{ title }}</h2>
-        <div class="options-table">
-          <base-button type="primary" title="Agregar" @click="addRecord()" />
+      <v-container fluid>
+        <span class="text-h5 font-weight-black">{{ title }}</span>
+        <div class="options-table text-right">
+          <base-button prepend-icon="mdi-plus" type="primary" title="Agregar" @click="addRecord()" />
         </div>
-        <!-- <v-col cols="12" sm="12" md="4" lg="4" xl="4" class="pl-0 pb-0 pr-0">
-          <v-text-field class="mt-3" variant="outlined" label="Buscar" type="text" v-model="search"></v-text-field>
-        </v-col> -->
-      </v-container>
-      <v-data-table-server :headers="headers" :items-length="total" :items="records" :loading="loading" item-title="id"
+
+
+        <div v-if="loading" class="loading-overlay">
+          <v-progress-circular indeterminate color="primary" size="64"></v-progress-circular>
+        </div>
+        <div v-else>
+          <!-- Accounts -->
+          <v-row>
+            <v-col v-for="record in records" :key="record.id" cols="12" sm="12" md="6">
+              <v-card class="my-card" @mouseover="hover = true" @mouseleave="hover = false">
+                <v-card-title><v-icon icon="mdi-piggy-bank" /> <b>{{ record.title }}</b></v-card-title>
+                <v-card-text>
+                  <p>Titular: {{ record.name }}</p>
+                  <p>Cuenta de Ahorros</p>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <div class="text-right">
+                    <p>Saldo disponible</p>
+                    <p class="text-h6 font-weight-black">${{ record.amount }}</p>
+                  </div>
+                </v-card-actions>
+              </v-card>
+            </v-col>
+          </v-row>
+          <!-- Account -->
+        </div>
+        <!-- <v-data-table-server :headers="headers" :items-length="total" :items="records" :loading="loading" item-title="id"
         item-value="id" @update:options="getDataFromApi">
-        <!-- <template v-slot:[`item.actions`]="{ item }">
-          <v-icon size="20" class="mr-2" @click="editItem(item.raw)" icon="mdi-pencil" />
-          <v-icon size="20" class="mr-2" @click="deleteItem(item.raw)" icon="mdi-delete" />
-        </template> -->
         <template v-slot:no-data>
           <v-icon @click="initialize" icon="mdi-refresh" />
         </template>
-      </v-data-table-server>
+      </v-data-table-server> -->
+
+
+      </v-container>
     </v-card>
+
+
 
     <v-dialog v-model="dialog" max-width="800px" persistent>
       <v-card>
@@ -34,29 +58,18 @@
           <v-container>
             <!-- Form -->
             <v-row class="pt-3">
-
-              <!-- email -->
-              <!-- <v-col cols="12" sm="12" md="4">
-                <BaseSelect label="Email" v-model.trim="v$.editedItem.email.$model" :items="users" item-title="email"
-                  :rules="v$.editedItem.email" />
-              </v-col> -->
-              <!-- email -->
-
-
               <!-- amount -->
               <v-col cols="12" sm="12" md="12">
                 <base-input type="number" label="Monto inicial" v-model="v$.editedItem.amount.$model"
                   :rules="v$.editedItem.amount" />
               </v-col>
               <!-- amount -->
-
-
             </v-row>
             <!-- Form -->
             <v-row>
               <v-col align="center">
                 <base-button type="primary" title="Guardar" @click="save" />
-                <base-button class="ms-1" type="secondary" title="Cancelar" @click="close" />
+                <base-button class="ms-1" type="info" title="Cancelar" @click="close" />
               </v-col>
             </v-row>
           </v-container>
@@ -73,7 +86,7 @@
           <v-row>
             <v-col align="center">
               <base-button type="primary" title="Confirmar" @click="deleteItemConfirm" />
-              <base-button class="ms-1" type="secondary" title="Cancelar" @click="closeDelete" />
+              <base-button class="ms-1" type="info" title="Cancelar" @click="closeDelete" />
             </v-col>
           </v-row>
         </v-container>
@@ -309,6 +322,7 @@ export default {
           this.records = data.data;
           this.total = data.total;
           this.loading = false;
+
         } catch (error) {
           alert.error("No fue posible obtener los registros.");
         }
@@ -324,3 +338,32 @@ export default {
   },
 };
 </script>
+
+<style>
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 9999;
+}
+
+.my-card {
+  transition: box-shadow 0.3s, background-color 0.3s;
+  /* Transición para la sombra y el color de fondo */
+  background-color: white;
+  /* Color de fondo predeterminado */
+}
+
+.my-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Sombra al hacer hover */
+  background-color: #D6DBDF;
+  /* Color de fondo al hacer hover */
+}
+</style>

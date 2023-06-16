@@ -24,11 +24,6 @@
         rel="stylesheet">
     <link href="/css/sb-admin-2.css" rel="stylesheet">
 
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/js/sb-admin-2.js"></script>
-
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
@@ -48,84 +43,31 @@
                 </a>
 
                 @guest
-                    @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="nav-link " href="{{ route('login') }}" aria-expanded="false">
-                                <i class="fa-solid fa-house"></i>
-                                <span>Iniciar</span>
-                            </a>
-                        </li>
-                    @endif
+                @if (Route::has('login'))
+                <li class="nav-item">
+                    <a class="nav-link " href="{{ route('login') }}" aria-expanded="false">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Iniciar</span>
+                    </a>
+                </li>
+                @endif
 
-                    @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link " href="{{ route('register') }}" aria-expanded="false">
-                                <i class="fa-solid fa-right-to-bracket"></i>
-                                <span>Registrarse</span>
-                            </a>
-                        </li>
-                    @endif
-                @else
-                    <!-- Divider -->
-                    <hr class="sidebar-divider my-0">
+                @if (Route::has('register'))
+                <li class="nav-item">
+                    <a class="nav-link " href="{{ route('register') }}" aria-expanded="false">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        <span>Registrarse</span>
+                    </a>
+                </li>
+                @endif
 
-                    <!-- Nav Item - Dashboard -->
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/home">
-                            <i class="fa-solid fa-building-columns"></i>
-                            <span>Cuentas</span></a>
-                    </li>
 
-                    <!-- Divider -->
-                    <hr class="sidebar-divider">
-
-                    <!-- Heading -->
-                    <div class="sidebar-heading">
-                        Acciones
-                    </div>
-                    <!-- Nav Item  -->
-
-                    <li class="dropdown nav-item">
-                        <a class="nav-link collapsed " type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-sharp fa-solid fa-money-bill-transfer"></i>
-                            <span>Transferencia</span>
-                        </a>
-                        <ul class="ms-3 dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Entre mis cuentas</a></li>
-                            <li><a class="dropdown-item" href="#">A terceros</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="#" aria-expanded="false">
-                            <i class="fa-solid fa-clock-rotate-left"></i>
-                            <span>Historial</span>
-                        </a>
-                    </li>
-                    <!-- Divider -->
-                    <hr class="sidebar-divider">
-
-                    <!-- Heading -->
-                    <div class="sidebar-heading">
-                        Pagar
-                    </div>
-
-                    <!-- Nav Item  -->
-
-                    <li class="nav-item">
-                        <a class="nav-link " href="#" aria-expanded="false">
-                            <i class="fa-solid fa-basket-shopping"></i>
-                            <span>Servicios</span>
-                        </a>
-                    </li>
-
-                    <!-- Divider -->
-                    <hr class="sidebar-divider d-none d-md-block">
                 @endguest
 
                 <!-- Sidebar Toggler (Sidebar) -->
-                {{-- <div class="text-center d-none d-md-inline">
+                <div class="text-center d-none d-md-inline">
                     <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                </div> --}}
+                </div>
             </ul>
             <!-- End of Sidebar -->
 
@@ -152,38 +94,36 @@
                             <li class="ms-auto">
                                 <!-- Authentication Links -->
                                 @guest
-                                    @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                                @endif
+                                @if (Route::has('login'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            @endif
 
-                                @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
-                                @endif
+                            @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                            @endif
                             @else
-                                <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        <i class="fa-solid fa-user me-3"></i>
-                                        {{ Auth::user()->name }}
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <i class="fa-solid fa-user me-3"></i>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
                                     </a>
 
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                            class="d-none">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
                             @endguest
                             </li>
 
@@ -213,16 +153,12 @@
                 <!-- End of Footer -->
 
             </div>
-            <!-- End of Wrapper -->
+
 
         </div>
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
-
     </div>
+
 </body>
 
 </html>

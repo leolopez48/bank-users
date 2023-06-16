@@ -36,15 +36,15 @@
             <v-row class="pt-3">
 
               <!-- name -->
-              <v-col cols="12" sm="12" md="4">
-                <base-input label="Name" v-model="v$.editedItem.name.$model" :rules="v$.editedItem.name" />
+              <v-col cols="12" sm="12" md="6">
+                <base-input label="Nombre Servicio" v-model="v$.editedItem.name.$model" :rules="v$.editedItem.name" />
               </v-col>
               <!-- name -->
 
 
               <!-- amount -->
-              <v-col cols="12" sm="12" md="4">
-                <base-input label="Amount" v-model="v$.editedItem.amount.$model" :rules="v$.editedItem.amount" />
+              <v-col cols="12" sm="12" md="6">
+                <base-input label="Monto" v-model="v$.editedItem.amount.$model" :rules="v$.editedItem.amount" />
               </v-col>
               <!-- amount -->
 
@@ -54,7 +54,7 @@
             <v-row>
               <v-col align="center">
                 <base-button type="primary" title="Guardar" @click="save" />
-                <base-button class="ms-1" type="secondary" title="Cancelar" @click="close" />
+                <base-button class="ms-1" type="info" title="Cancelar" @click="close" />
               </v-col>
             </v-row>
           </v-container>
@@ -68,10 +68,11 @@
           <h1 class="black-secondary text-center mt-3 mb-3">
             Eliminar registro
           </h1>
+          <p class="text-center mb-3">¿Desea eliminar este registro?</p>
           <v-row>
             <v-col align="center">
               <base-button type="primary" title="Confirmar" @click="deleteItemConfirm" />
-              <base-button class="ms-1" type="secondary" title="Cancelar" @click="closeDelete" />
+              <base-button class="ms-1" type="info" title="Cancelar" @click="closeDelete" />
             </v-col>
           </v-row>
         </v-container>
@@ -108,9 +109,9 @@ export default {
       dialogDelete: false,
       headers: [
 
-        { title: "Name", key: "name" },
-        { title: "Amount", key: "amount" },
-        { title: "ACCIONES", key: "actions", sortable: false },
+        { title: "Servicio", key: "name" },
+        { title: "Monto", key: "amount" },
+        { title: "Acciones", key: "actions", sortable: false },
       ],
       records: [],
       editedIndex: -1,
@@ -152,7 +153,7 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "Nuevo registro" : "Editar registro";
+      return this.editedIndex === -1 ? "Nuevo servicio" : "Editar servicio";
     },
   },
 

@@ -35,10 +35,19 @@ const amount = (history) => {
 
 <template>
     <v-container>
-        <h2 class="mb-3">Historial de transacciones</h2>
+        <h2 class="">Historial de transacciones</h2>
         <v-row v-if="!loading">
             <v-col cols="12" v-for="history in history" :key="history.id">
-                <v-card>
+                <v-card class="my-card" @mouseover="hover = true" @mouseleave="hover = false">
+
+                    <h3 v-if="user.email == history.sender.email" class="text-red text-right">
+                        Egreso
+                        <v-icon>mdi-transfer-down</v-icon>
+                    </h3>
+                    <h3 v-else class="text-green text-right">
+                        Ingreso
+                        <v-icon>mdi-transfer-up</v-icon>
+                    </h3>
 
                     <v-card-title>
                         {{ history.concept }}
@@ -57,11 +66,13 @@ const amount = (history) => {
 
                         <h3 class="mt-4">Tipo de movimiento</h3>
                         <hr class="my-0 mb-2">
-                        <h3 v-if="user.email == history.sender.email" class="text-red">
+                        <h3 v-if="user.email == history.sender.email" class="text-red ">
                             Egreso
+                            <v-icon>mdi-transfer-down</v-icon>
                         </h3>
-                        <h3 v-else class="text-green">
+                        <h3 v-else class="text-green ">
                             Ingreso
+                            <v-icon>mdi-transfer-up</v-icon>
                         </h3>
                     </v-card-text>
                 </v-card>
@@ -76,3 +87,19 @@ const amount = (history) => {
         </v-row>
     </v-container>
 </template>
+
+<style>
+.my-card {
+    transition: box-shadow 0.3s, background-color 0.3s;
+    /* Transición para la sombra y el color de fondo */
+    background-color: white;
+    /* Color de fondo predeterminado */
+}
+
+.my-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Sombra al hacer hover */
+    background-color: #D6DBDF;
+    /* Color de fondo al hacer hover */
+}
+</style>

@@ -1,28 +1,29 @@
 <template>
-  <footer class="mt-5 mb-3">
-    <v-container>
-      <v-row class="text-center">
-        <v-col cols="12" sm="12" md="4" class="my-auto">
-          <a href="https://cultura.gob.sv" target="__blank"><b>ITCA FEPADE</b></a>
-        </v-col>
-        <v-col cols="12" sm="12" md="4">
-          <v-img src="https://www.itca.edu.sv/wp-content/themes/elaniin-itca/images/logoColor.png" alt=""
-            class="mx-auto text-center" style="max-width: 350px; height: auto" />
-        </v-col>
-        <v-col cols="12" sm="12" md="4" class="my-auto">
-          <b>Secure Bank</b>
-        </v-col>
-      </v-row>
+  <footer>
+    <v-container fluid>
+      <v-card flat tile class="text-center" style="background-color: transparent; box-shadow: none;">
+        <v-card-text>
+          <v-btn size="x-small" href="https://www.itca.edu.sv/" target="_blank" class="ma-2" color="black"
+            icon="mdi-school">
+          </v-btn>
+          <v-btn size="x-small" href="https://github.com/leolopez48/bank-users" target="_blank" class="ma-2" color="black"
+            icon="mdi-code-tags">
+          </v-btn>
+        </v-card-text>
+        <span class="text-subtitle-2"> {{ new Date().getFullYear() }} — Secure Bank</span>
+      </v-card>
+
     </v-container>
   </footer>
 </template>
-
-<script setup>
-</script>
 
 <style scoped>
 a {
   text-decoration: none;
   color: black;
+}
+
+.rounded-icon {
+  border-radius: 50%;
 }
 </style>

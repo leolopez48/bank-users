@@ -2,7 +2,7 @@
   <div data-app>
     <v-card class="p-3 mt-3">
       <v-container>
-        <h2>{{ title }}</h2>
+        <span class="text-h5 font-weight-black">{{ title }}</span>
         <div class="options-table">
           <base-button type="primary" title="Nueva" @click="addRecord()" />
         </div>
@@ -67,7 +67,7 @@
             <v-row>
               <v-col align="center">
                 <base-button type="primary" title="Guardar" @click="save" />
-                <base-button class="ms-1" type="secondary" title="Cancelar" @click="close" />
+                <base-button class="ms-1" type="info" title="Cancelar" @click="close" />
               </v-col>
             </v-row>
           </v-container>
@@ -178,7 +178,7 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "Nuevo registro" : "Editar registro";
+      return this.editedIndex === -1 ? "Nueva transferencia" : "Editar transferencia";
     },
   },
 

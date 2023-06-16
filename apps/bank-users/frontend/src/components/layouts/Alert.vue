@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="alert d-flex flex-row justify-space-between p-3"
-    :class="type"
-    v-if="show"
-  >
+  <div class="alert d-flex flex-row justify-space-between p-3" :class="type" v-if="show">
     <!--  -->
     <v-icon icon="mdi-bell"></v-icon>
     <span>{{ message }}</span>
@@ -34,13 +30,14 @@ const { message, type, show, alert } = useAlert();
 @import "@/assets/styles/variables.scss";
 
 .alert-success {
-  background: $primary-color;
+  background: #52BE80;
   color: $white;
   font-weight: 600;
   border-radius: 5px;
 }
+
 .alert-error {
-  background: $secondary-color;
+  background: #922B21;
   color: $white;
   font-weight: 600;
   border-radius: 5px;

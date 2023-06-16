@@ -22,6 +22,9 @@ const state = ref({
 const accounts = ref([]);
 const services = ref([]);
 
+
+const pago = ref(false);
+
 const rules = {
     sender: {
         required: helpers.withMessage(langMessages.required, required),
@@ -72,7 +75,7 @@ const validateForm = async () => {
 
     try {
         const { data } = await serviceApi.post('/pay', state.value)
-
+        pago.value = true
         alert.success(data.message)
     } catch (error) {
         alert.error(error.response.data.message)
@@ -81,32 +84,41 @@ const validateForm = async () => {
 </script>
 
 <template>
-    <v-card class="mt-5">
-        <v-card-title>
-            <h2 class="mt-3">Pagar servicio</h2>
-        </v-card-title>
-        <!-- <hr> -->
+    <div v-if="pago">
+        <v-container class="text-center">
+            <v-icon size="100" color="success">mdi-check-circle</v-icon>
+            <h1 class="">Pago Completado</h1>
+            <p>Muchas gracias , Tu pago ha sido completado exitosamente.</p>
+        </v-container>
+    </div>
+    <div v-else>
+        <v-card class="mt-5">
+            <v-card-title>
+                <h2 class="mt-3">Pago de un servicio</h2>
+            </v-card-title>
+            <!-- <hr> -->
 
-        <v-card-text>
-            <v-row>
-                <!-- Accounts -->
-                <v-col cols="12" sm="12" md="6">
-                    <base-select label="Número de cuenta del emisor" :items="accounts" item-title="title"
-                        v-model="v$.sender.$model" :rules="v$.sender" return-object />
-                </v-col>
-                <!-- Accounts -->
+            <v-card-text>
+                <v-row>
+                    <!-- Accounts -->
+                    <v-col cols="12" sm="12" md="6">
+                        <base-select label="Número de cuenta del emisor" :items="accounts" item-title="title"
+                            v-model="v$.sender.$model" :rules="v$.sender" return-object />
+                    </v-col>
+                    <!-- Accounts -->
 
-                <!-- Services -->
-                <v-col cols="12" sm="12" md="6">
-                    <base-select label="Servicio a pagar" :items="services" item-title="name" v-model="v$.service.$model"
-                        :rules="v$.service" return-object />
-                </v-col>
-                <!-- Services -->
+                    <!-- Services -->
+                    <v-col cols="12" sm="12" md="6">
+                        <base-select label="Servicio a pagar" :items="services" item-title="name"
+                            v-model="v$.service.$model" :rules="v$.service" return-object />
+                    </v-col>
+                    <!-- Services -->
 
-                <v-card-actions class="mx-auto">
-                    <BaseButton type="primary" title="Pagar" class="mt-3" @click="validateForm()" />
-                </v-card-actions>
-            </v-row>
-        </v-card-text>
-    </v-card>
+                    <v-card-actions class="mx-auto">
+                        <BaseButton type="primary" title="Pagar" class="mt-3" @click="validateForm()" />
+                    </v-card-actions>
+                </v-row>
+            </v-card-text>
+        </v-card>
+    </div>
 </template>
